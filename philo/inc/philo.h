@@ -6,40 +6,56 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/04 14:14:37 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:39:03 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+/* DEFINE STATUS CODES */
+# define SUCCESS 0
+# define FAILURE 1
+# define EXIT_FAILURE 1
+# define EXIT_SUCCESS 0
+
+/* INCLUDE USEFUL AND ALLOWED FUNCTIONS */
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
 # include <stdio.h>
 
+/* DEFINE DATA STRUCTURES */
 typedef struct s_philo
 {
 	int				number;
 	int				status;
+	int				times_eaten;
+	int				last_eat_timestamp;
+	int				last_change_timestamp;
+	pthread_t		*thread;
 	struct s_philo	*next;
-	struct s_philo	*prev;
 }	t_philo;
 
 typedef struct s_data
 {
-	t_philo	*philo_list;
-	int		number_of_philos;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		eat_to_finish;
+	int				number_of_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_to_finish;
+	int				*forks;
+	t_philo			*philo_list;
+	pthread_mutex_t	*data_mutex;
 }	t_data;
 
 /* INITIALIZER */
-void	initialize_data(int argc, char **argv, t_data *data);
+void	initialize_philo_data(int argc, char **argv, t_data *data);
 
 /* MAIN */
 void	ft_error(char *err_msg, t_data *data);
-void	free_philo(t_data *data);
+int		monitor_philosophers(t_data *data);
+int		launch_philo_threads(t_data *data);
+int		run_simulation(t_data *data);
+void	free_philo_data(t_data *data);
 
 #endif
