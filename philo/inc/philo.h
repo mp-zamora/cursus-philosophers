@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 12:28:53 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:38:27 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_philo
 	int				number;
 	int				status;
 	int				times_eaten;
+	int				fork_number;
 	long			last_eat_milis;
 	long			last_change_milis;
 	pthread_t		*thread;
@@ -44,6 +45,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	int				terminate;
 	int				number_of_philos;
 	long			time_to_die;
 	long			time_to_eat;
@@ -58,12 +60,13 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isspace(int c);
 int		ft_specialcases(const char *nptr);
 int		ft_atoi(const char *nptr);
+long	get_current_milis(t_data *data);
 
 /* AUXILIARY */
 void	initialize_philo_data(int argc, char **argv, t_data **data);
+void	initialize_forks(t_data *data);
 void	launch_philo_threads(t_data *data);
 void	initialize_philo_list(t_data *data);
-long	get_current_milis(t_data *data);
 int		did_philosophers_eat_enough(t_data *data);
 
 /* SIMULATION 2 */

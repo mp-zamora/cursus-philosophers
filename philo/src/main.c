@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 12:25:43 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:14:52 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	free_philo_list(t_philo *list)
 				printf("Error: Failure joining thread.\n");
 			free (list->thread);
 		}
-		aux = list->next;
-		free (list);
-		list = aux;
+		aux = list;
+		list = list->next;
+		free (aux);
 	}
 }
 
