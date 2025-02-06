@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 10:39:00 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:46:36 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	initialize_philo_data(int argc, char *argv[], t_data *data)
 	else
 		data->eat_to_finish = -1;
 	data->forks = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *)
-										  * data->number_of_philos);
+			* data->number_of_philos);
 	if (!data->forks)
 		ft_error("Failure initializing the data structure.", data);
 	i = -1;
@@ -90,7 +90,6 @@ long	get_current_milis(t_data *data)
 	if (gettimeofday(&time, NULL) == -1)
 		ft_error("Failure fetching current time.", data);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-
 }
 
 int	kill_philosopher(t_philo *philo)
@@ -143,7 +142,7 @@ int	monitor_philosophers(t_data *data)
 void	catch_forks(t_philo *philo)
 {
 	long	current_milis;
-	
+
 	if (philo->number == philo->data->number_of_philos)
 	{
 		current_milis = get_current_milis(philo->data);
@@ -198,7 +197,7 @@ void	go_eat(t_philo *philo)
 
 void	*philo_routine(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	long	current_milis;
 
 	philo = (t_philo *)arg;
@@ -254,9 +253,11 @@ void	free_philo_list(t_philo *list)
 		return ;
 	while (list)
 	{
-		/* Should I free it or close it? */
 		if (list->thread)
+		{
+			pthread_join(list->thread);
 			free (list->thread);
+		}
 		aux = list->next;
 		free (list);
 		list = aux;
@@ -265,15 +266,22 @@ void	free_philo_list(t_philo *list)
 
 void	free_philo_data(t_data *data)
 {
+	int	i;
+
 	if (!data)
 		return ;
-	/* Should I free it or close it? */
-	if (data->mutex)
-		free (data->mutex);
-	if (data->forks)
-		free (data->forks);
 	if (data->philo_list)
 		free_philo_list(data->philo_list);
+	if (data->forks)
+	{
+		i = -1;
+		while (data->forks[++i])
+		{
+			pthread_mutex_destroy(data->forks[i]);
+			free (data->forks[i]);
+		}
+		free (data->forks);
+	}
 	free (data);
 }
 
