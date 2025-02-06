@@ -6,7 +6,7 @@
 #    By: mpenas-z <mpenas-z@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 14:16:05 by mpenas-z          #+#    #+#              #
-#    Updated: 2025/02/06 09:52:15 by mpenas-z         ###   ########.fr        #
+#    Updated: 2025/02/06 12:22:28 by mpenas-z         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,16 @@ NAME = philo
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g
+LDFLAGS = -lpthread
 
 SRC_PATH = src/
 OBJ_PATH = obj/
 
-SRC =	main.c
+SRC =	main.c \
+		simulation1.c \
+		simulation2.c \
+		auxiliary.c \
+		utilities.c
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 OBJS = $(patsubst $(SRC_PATH)%.c,$(OBJ_PATH)%.o,$(SRCS))
 INC = -I./inc/
@@ -38,13 +43,13 @@ debug: $(NAME)
 
 $(NAME): $(OBJS)
 	@printf "$(YELLOW)Building $(NAME)...$(RESET) \n"
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(CLIBS) -o $(NAME) && \
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LDFLAGS) $(CLIBS) -o $(NAME) && \
 		printf "$(GREEN)✔ Build succesful!$(RESET) \n" || \
 		printf "$(RED)✘ Build failed!$(RESET) \n"
 
 bonus: $(OBJS)
 	@printf "$(YELLOW)Building BONUS...$(RESET) \n"
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(CLIBS) -o $(NAME) && \
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LDFLAGS) $(CLIBS) -o $(NAME) && \
 		printf "$(GREEN)✔ Build succesful!$(RESET) \n" || \
 		printf "$(RED)✘ Build failed!$(RESET) \n"
 
