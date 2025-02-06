@@ -6,7 +6,7 @@
 #    By: mpenas-z <mpenas-z@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 14:16:05 by mpenas-z          #+#    #+#              #
-#    Updated: 2025/02/04 10:13:28 by mpenas-z         ###   ########.fr        #
+#    Updated: 2025/02/06 09:52:15 by mpenas-z         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,11 @@ DFLAGS = -g
 
 SRC_PATH = src/
 OBJ_PATH = obj/
-LIB_PATH = ./libft/
 
 SRC =	main.c
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 OBJS = $(patsubst $(SRC_PATH)%.c,$(OBJ_PATH)%.o,$(SRCS))
 INC = -I./inc/
-LIB = $(addprefix $(LIB_PATH), libft.a)
 
 GREEN = \033[0;32m
 BLUE = \033[0;34m
@@ -38,21 +36,15 @@ all: $(NAME)
 debug: CFLAGS += -g
 debug: $(NAME)
 
-$(LIB):
-	@printf "$(YELLOW)Building libft...$(RESET) \n"
-	@$(MAKE) -C $(LIB_PATH) > /dev/null 2>&1 && \
-		printf "$(GREEN)✔ Build succesful!$(RESET) \n" || \
-		printf "$(RED)✘ Build failed!$(RESET) \n"
-
-$(NAME): $(LIB) $(OBJS)
+$(NAME): $(OBJS)
 	@printf "$(YELLOW)Building $(NAME)...$(RESET) \n"
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIB) $(CLIBS) -o $(NAME) && \
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(CLIBS) -o $(NAME) && \
 		printf "$(GREEN)✔ Build succesful!$(RESET) \n" || \
 		printf "$(RED)✘ Build failed!$(RESET) \n"
 
-bonus: $(LIB) $(OBJS)
+bonus: $(OBJS)
 	@printf "$(YELLOW)Building BONUS...$(RESET) \n"
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIB) $(CLIBS) -o $(NAME) && \
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(CLIBS) -o $(NAME) && \
 		printf "$(GREEN)✔ Build succesful!$(RESET) \n" || \
 		printf "$(RED)✘ Build failed!$(RESET) \n"
 
@@ -66,13 +58,11 @@ $(OBJ_PATH):
 
 clean:
 	@printf "$(BLUE)Cleaning object files...$(RESET) \n"
-	@$(MAKE) -C $(LIB_PATH) clean > /dev/null 2>&1
 	@rm -f $(OBJS)
 	@printf "$(GREEN)✔ Objects cleaned succesfully!$(RESET) \n"
 
 fclean: clean
 	@printf "$(BLUE)Removing binaries, dependencies and object files...$(RESET) \n"
-	@$(MAKE) -C $(LIB_PATH) fclean > /dev/null 2>&1
 	@rm -f $(NAME)
 	@printf "$(GREEN)✔ Directory cleaned succesfully!$(RESET) \n"
 
@@ -80,5 +70,4 @@ re: fclean all
 
 call: all clean
 	@printf "$(YELLOW)Cleaning dependency builds...$(RESET) \n"
-	@$(MAKE) -C $(LIB_PATH) fclean > /dev/null 2>&1
 	@printf "$(GREEN)✔ Dependency builds cleaned succesfully!$(RESET) \n"

@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 09:33:42 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 09:52:37 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define EXIT_SUCCESS 0
 
 /* INCLUDE USEFUL AND ALLOWED FUNCTIONS */
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
 # include <stdio.h>
 # include <sys/time.h>
 
