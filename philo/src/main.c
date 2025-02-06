@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 14:14:52 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:39:33 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void	free_philo_list(t_philo *list)
 		return ;
 	while (list)
 	{
+		if (list->fork_ids[0] != -1)
+			if (pthread_mutex_unlock(list->data->forks[list->fork_ids[0]]) != 0)
+				printf("Error: Failure unlocking mutex on termination.\n");
+		if (list->fork_ids[1] != -1)
+			if (pthread_mutex_unlock(list->data->forks[list->fork_ids[1]]) != 0)
+				printf("Error: Failure unlocking mutex on termination.\n");
 		if (list->thread)
 		{
 			if (pthread_join((*list->thread), NULL) != 0)

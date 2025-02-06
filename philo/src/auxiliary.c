@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 14:38:40 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:10:16 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	launch_philo_threads(t_data *data)
 		iter->number = num;
 		iter->status = 0;
 		iter->times_eaten = 0;
-		iter->fork_number = 0;
+		iter->fork_ids[0] = -1;
+		iter->fork_ids[1] = -1;
 		current_milis = get_current_milis(data);
 		iter->last_eat_milis = current_milis;
 		iter->last_change_milis = current_milis;

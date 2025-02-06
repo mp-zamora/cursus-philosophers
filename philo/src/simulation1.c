@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 14:42:58 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:44:31 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,26 @@ void	go_think(t_philo *philo)
 {
 	long	current_milis;
 
+	if (philo->data->terminate == 1)
+		return ;
 	philo->status = 1;
 	current_milis = get_current_milis(philo->data);
 	philo->last_change_milis = current_milis;
 	printf("%ld %d is thinking.\n", current_milis, philo->number);
-	catch_forks(philo);
-	/* NEED TO SOLVE 1 PHILO PROBLEM */
-	/* CAN SOLVE IT BY KEEPING A LIST OF LOCKED MUTEX's IDs */
-	/* AND THEN TTYING TO CATCH FORKS UNTIL THERE ARE 2 AVOIDING DEADLOCK */
-	/*while (philo->fork_number != 2)*/
+	while ((philo->fork_ids[1] == -1 || philo->fork_ids[0] == -1)
+		&& philo->data->terminate != 1)
+	{
+		catch_first_fork(philo);
+		catch_second_fork(philo);
+	}
 }
 
 void	go_eat(t_philo *philo)
 {
 	long	current_milis;
 
+	if (philo->data->terminate == 1)
+		return ;
 	philo->status = 2;
 	current_milis = get_current_milis(philo->data);
 	philo->last_change_milis = current_milis;

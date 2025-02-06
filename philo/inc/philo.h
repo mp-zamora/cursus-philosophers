@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 14:38:27 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:25:25 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_philo
 	int				number;
 	int				status;
 	int				times_eaten;
-	int				fork_number;
+	int				fork_ids[2];
 	long			last_eat_milis;
 	long			last_change_milis;
 	pthread_t		*thread;
@@ -71,7 +71,8 @@ int		did_philosophers_eat_enough(t_data *data);
 
 /* SIMULATION 2 */
 void	kill_philosopher(t_philo *philo);
-void	catch_forks(t_philo *philo);
+void	catch_first_fork(t_philo *philo);
+void	catch_second_fork(t_philo *philo);
 void	leave_forks(t_philo *philo);
 
 /* SIMULATION 1 */
