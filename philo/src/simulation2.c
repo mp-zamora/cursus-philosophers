@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 20:34:05 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:11:30 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	catch_first_fork(t_philo *philo)
 			if (pthread_mutex_lock(philo->data->forks[0]) != 0)
 				ft_error("Failure locking mutex.\n", philo->data);
 			philo->fork_ids[0] = 0;
-			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data),
+			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data) - philo->data->start_time,
 				philo->number);
 		}
 		else
@@ -41,7 +41,7 @@ void	catch_first_fork(t_philo *philo)
 			if (pthread_mutex_lock(philo->data->forks[philo->number - 1]) != 0)
 				ft_error("Failure locking mutex.\n", philo->data);
 			philo->fork_ids[0] = philo->number - 1;
-			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data),
+			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data) - philo->data->start_time,
 				philo->number);
 		}
 	}
@@ -58,7 +58,7 @@ void	catch_second_fork(t_philo *philo)
 			if (pthread_mutex_lock(philo->data->forks[philo->number - 1]) != 0)
 				ft_error("Failure locking mutex.\n", philo->data);
 			philo->fork_ids[1] = philo->number - 1;
-			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data),
+			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data) - philo->data->start_time,
 				philo->number);
 		}
 		else
@@ -66,7 +66,7 @@ void	catch_second_fork(t_philo *philo)
 			if (pthread_mutex_lock(philo->data->forks[philo->number]) != 0)
 				ft_error("Failure locking mutex.\n", philo->data);
 			philo->fork_ids[1] = philo->number;
-			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data),
+			printf("%ld %d has taken a fork.\n", get_current_milis(philo->data) - philo->data->start_time,
 				philo->number);
 		}
 	}

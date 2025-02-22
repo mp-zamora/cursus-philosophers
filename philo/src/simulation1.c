@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 20:44:31 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:10:38 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	go_think(t_philo *philo)
 	philo->status = 1;
 	current_milis = get_current_milis(philo->data);
 	philo->last_change_milis = current_milis;
-	printf("%ld %d is thinking.\n", current_milis, philo->number);
+	printf("%ld %d is thinking.\n", current_milis - philo->data->start_time, philo->number);
 	while ((philo->fork_ids[1] == -1 || philo->fork_ids[0] == -1)
 		&& philo->data->terminate != 1)
 	{
@@ -65,7 +65,7 @@ void	go_eat(t_philo *philo)
 	current_milis = get_current_milis(philo->data);
 	philo->last_change_milis = current_milis;
 	philo->last_eat_milis = current_milis;
-	printf("%ld %d is eating.\n", current_milis, philo->number);
+	printf("%ld %d is eating.\n", current_milis - philo->data->start_time, philo->number);
 	usleep(philo->data->time_to_eat * 100);
 	current_milis = get_current_milis(philo->data);
 	philo->times_eaten++;
@@ -83,7 +83,7 @@ void	*philo_routine(void *arg)
 		philo->status = 0;
 		current_milis = get_current_milis(philo->data);
 		philo->last_change_milis = current_milis;
-		printf("%ld %d is sleeping.\n", current_milis, philo->number);
+		printf("%ld %d is sleeping.\n", current_milis - philo->data->start_time, philo->number);
 		usleep(philo->data->time_to_sleep * 100);
 		go_think(philo);
 		go_eat(philo);
