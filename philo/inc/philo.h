@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/22 18:09:08 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:02:00 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	long			time_to_sleep;
 	long			start_time;
 	int				eat_to_finish;
+	pthread_mutex_t	*main_mutex;
 	pthread_mutex_t	**forks;
 	t_philo			*philo_list;
 }	t_data;
@@ -64,26 +65,26 @@ int		ft_atoi(const char *nptr);
 long	get_current_milis(t_data *data);
 
 /* AUXILIARY */
-void	initialize_philo_data(int argc, char **argv, t_data **data);
-void	initialize_forks(t_data *data);
-void	launch_philo_threads(t_data *data);
-void	initialize_philo_list(t_data *data);
+int		initialize_philo_data(int argc, char **argv, t_data **data);
+int		initialize_forks(t_data *data);
+int		launch_philo_threads(t_data *data);
+int		initialize_philo_list(t_data *data);
 int		did_philosophers_eat_enough(t_data *data);
 
 /* SIMULATION 2 */
-void	kill_philosopher(t_philo *philo);
-void	catch_first_fork(t_philo *philo);
-void	catch_second_fork(t_philo *philo);
-void	leave_forks(t_philo *philo);
+int		kill_philosopher(t_philo *philo);
+int		catch_first_fork(t_philo *philo);
+int		catch_second_fork(t_philo *philo);
+int		leave_forks(t_philo *philo);
 
 /* SIMULATION 1 */
-void	monitor_philosophers(t_data *data);
-void	go_think(t_philo *philo);
-void	go_eat(t_philo *philo);
+int		monitor_philosophers(t_data *data);
+int		go_think(t_philo *philo);
+int		go_eat(t_philo *philo);
 void	*philo_routine(void *arg);
 
 /* MAIN */
-void	ft_error(char *err_msg, t_data *data);
+int		ft_error(char *err_msg, t_data *data);
 void	free_philo_list(t_philo *list);
 void	free_philo_data(t_data *data);
 

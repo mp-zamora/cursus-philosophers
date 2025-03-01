@@ -6,17 +6,17 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 20:39:33 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:54:02 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	ft_error(char *err_msg, t_data *data)
+int	ft_error(char *err_msg, t_data *data)
 {
 	printf("Error: %s\n", err_msg);
 	free_philo_data(data);
-	exit (EXIT_FAILURE);
+	return (1);
 }
 
 void	free_philo_list(t_philo *list)
@@ -38,6 +38,7 @@ void	free_philo_list(t_philo *list)
 			if (pthread_join((*list->thread), NULL) != 0)
 				printf("Error: Failure joining thread.\n");
 			free (list->thread);
+			list->thread = NULL;
 		}
 		aux = list;
 		list = list->next;
@@ -52,30 +53,43 @@ void	free_philo_data(t_data *data)
 	if (!data)
 		return ;
 	if (data->philo_list)
+	{
 		free_philo_list(data->philo_list);
+		data->philo_list = NULL;
+	}
+	if (data->main_mutex)
+	{
+		pthread_mutex_destroy(data->main_mutex);
+		free (data->main_mutex);
+		data->main_mutex = NULL;
+	}
 	if (data->forks)
 	{
 		i = -1;
-		while (data->forks[++i])
+		while (++i < data->number_of_philos)
 		{
-			if (pthread_mutex_destroy(data->forks[i]) != 0)
-				printf("Error: Failure destroying mutex.\n");
+			pthread_mutex_destroy(data->forks[i]);
 			free (data->forks[i]);
 		}
 		free (data->forks);
+		data->forks = NULL;
 	}
 	free (data);
 }
 
+/* DEADLOCK FOUND -> valgrind --leak-check=full ./philo 5 410 200 100 */
 int	main(int argc, char *argv[])
 {
 	t_data	*data;
 
 	if (argc != 5 && argc != 6)
 		ft_error("Not enough args!", NULL);
-	initialize_philo_data(argc, argv, &data);
-	launch_philo_threads(data);
-	monitor_philosophers(data);
-	free_philo_data(data);
+	if (initialize_philo_data(argc, argv, &data) != 0)
+		return (EXIT_FAILURE);
+	if (launch_philo_threads(data) != 0)
+		return (EXIT_FAILURE);
+	if (monitor_philosophers(data) != 0)
+		return (EXIT_FAILURE);
+	/*free_philo_data(data);*/
 	return (EXIT_SUCCESS);
 }
