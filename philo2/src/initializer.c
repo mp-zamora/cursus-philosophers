@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:38:02 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:46:00 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:09:11 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	initialize_philo_data(int argc, char *argv[], t_data **data)
 		return (1);
 	if (initialize_mutexes(*data) != 0)
 		return (ft_error("Failure initializing mutex.", *data));
-	(*data)->philo_list = NULL;
 	return (0);
 }
 

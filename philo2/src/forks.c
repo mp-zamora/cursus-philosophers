@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:54:42 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:16:04 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:24:56 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	catch_first_fork(t_philo *philo)
 		return (0);
 	}
 	pthread_mutex_unlock(philo->data->fork_mutex[target_fork]);
-	printf("%ld %d has taken a fork [%d].\n", \
+	printf("%ld %d has taken a fork.\n", \
 		get_current_milis(philo->data) - philo->data->start_time,
-		philo->number, target_fork);
+		philo->number);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	catch_second_fork(t_philo *philo)
 	{
 		philo->data->fork_status[target_fork] = 1;
 		pthread_mutex_lock(philo->philo_mutex);
-		philo->fork_ids[0] = target_fork;
+		philo->fork_ids[1] = target_fork;
 		pthread_mutex_unlock(philo->philo_mutex);
 	}
 	else
@@ -62,9 +62,9 @@ int	catch_second_fork(t_philo *philo)
 		return (0);
 	}
 	pthread_mutex_unlock(philo->data->fork_mutex[target_fork]);
-	printf("%ld %d has taken a fork [%d].\n", \
+	printf("%ld %d has taken a fork.\n", \
 		get_current_milis(philo->data) - philo->data->start_time,
-		philo->number, target_fork);
+		philo->number);
 	return (0);
 }
 

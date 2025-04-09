@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:38:51 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:09:26 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_error(char *err_msg, t_data *data)
 {
 	printf("Error: %s\n", err_msg);
-	terminate_simulation(data);
+	if (data)
+		terminate_simulation(data);
 	return (1);
 }
 
@@ -81,15 +82,16 @@ void	free_philo_data(t_data *data)
 	free (data);
 }
 
+/* NEED TO ADD PROTECTION AGAINST NON NUMERICAL VALUES*/
 /* DEADLOCK FOUND -> valgrind --leak-check=full ./philo 5 410 200 100 */
 int	main(int argc, char *argv[])
 {
 	t_data	*data;
 
 	if (argc != 5 && argc != 6)
-		ft_error("Not enough args!", NULL);
+		return (ft_error("Not enough args!", NULL));
 	if (initialize_philo_data(argc, argv, &data) != 0)
-		return (EXIT_FAILURE);
+		return (ft_error("Initialization of philo data failed!", data));
 	run_simulation(data);
 	free_philo_data(data);
 	return (EXIT_SUCCESS);

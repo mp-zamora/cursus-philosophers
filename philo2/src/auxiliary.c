@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:43:23 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:10:20 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	launch_threads(t_data *data)
 
 	iter = data->philo_list;
 	num = 0;
-	while (iter && ++num <= data->number_of_philos)
+	while (iter && num < data->number_of_philos)
 	{
 		iter->last_eat_milis = get_current_milis(data);
 		iter->last_change_milis = get_current_milis(data);
