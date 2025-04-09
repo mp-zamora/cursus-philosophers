@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/08 23:02:29 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:37:05 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
 	long			time_to_sleep;
 	long			start_time;
 	int				eat_to_finish;
-	int				*fork_state;
+	int				*fork_status;
 	pthread_mutex_t	*main_mutex;
 	pthread_mutex_t	**fork_mutex;
 	t_philo			*philo_list;
@@ -67,27 +67,42 @@ int		ft_atoi(const char *nptr);
 long	get_current_milis(t_data *data);
 
 /* AUXILIARY */
-int		initialize_philo_data(int argc, char **argv, t_data **data);
-int		initialize_forks(t_data *data);
-int		launch_philo_threads(t_data *data);
-int		initialize_philo_list(t_data *data);
+int		launch_threads(t_data *data);
+int		join_threads(t_data *data);
+void	terminate_simulation(t_data *data);
 int		did_philosophers_eat_enough(t_data *data);
 
-/* SIMULATION 2 */
-int		kill_philosopher(t_philo *philo);
+/* FORKS */
 int		catch_first_fork(t_philo *philo);
 int		catch_second_fork(t_philo *philo);
 int		leave_forks(t_philo *philo);
+int		has_first_fork(t_philo *philo);
+int		has_second_fork(t_philo *philo);
 
-/* SIMULATION 1 */
-int		monitor_philosophers(t_data *data);
+/* INITIALIZER */
+int		initialize_philo_data(int argc, char *argv[], t_data **data);
+int		initialize_mutexes(t_data *data);
+int		initialize_forks(t_data *data);
+int		initialize_philosophers(t_data *data);
+int		initialize_philo_list(t_data *data);
+
+/* SIMULATION 2 */
 int		go_think(t_philo *philo);
 int		go_eat(t_philo *philo);
+int		go_sleep(t_philo *philo);
 void	*philo_routine(void *arg);
+
+/* SIMULATION 1 */
+int		run_simulation(t_data *data);
+long	get_last_eat_milis(t_philo *philo);
+int		monitor_philosophers(t_data *data);
+int		check_termination(t_data *data);
+int		kill_philosopher(t_philo *philo);
 
 /* MAIN */
 int		ft_error(char *err_msg, t_data *data);
 void	free_philo_list(t_philo *list);
+void	free_philo_forks(t_data *data);
 void	free_philo_data(t_data *data);
 
 #endif
