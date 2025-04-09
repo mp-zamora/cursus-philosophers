@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:17:19 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:41:10 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	go_eat(t_philo *philo)
 
 int	go_sleep(t_philo *philo)
 {
+	long  current_milis;
+
 	pthread_mutex_lock(philo->philo_mutex);
 	philo->status = 0;
 	current_milis = get_current_milis(philo->data);
@@ -72,7 +74,6 @@ int	go_sleep(t_philo *philo)
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
-	long	current_milis;
 
 	philo = (t_philo *)arg;
 	while (1)

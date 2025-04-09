@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:38:02 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:19:21 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:46:00 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	initialize_philo_data(int argc, char *argv[], t_data **data)
 		(*data)->eat_to_finish = -1;
 	if (initialize_philosophers(*data) != 0)
 		return (1);
-	if (initialize_mutexes(data) != 0)
+	if (initialize_mutexes(*data) != 0)
 		return (ft_error("Failure initializing mutex.", *data));
 	(*data)->philo_list = NULL;
 	return (0);
@@ -37,13 +37,14 @@ int	initialize_philo_data(int argc, char *argv[], t_data **data)
 
 int	initialize_mutexes(t_data *data)
 {
-	(*data)->main_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	if (!(*data)->main_mutex)
-		return (ft_error("Failure creating main mutex.", *data));
-	if (pthread_mutex_init((*data)->main_mutex, NULL) != 0)
-		return (ft_error("Failure initializing mutex.\n", *data));
-	if (initialize_forks(*data) != 0)
+	data->main_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (!data->main_mutex)
+		return (ft_error("Failure creating main mutex.", data));
+	if (pthread_mutex_init(data->main_mutex, NULL) != 0)
+		return (ft_error("Failure initializing mutex.\n", data));
+	if (initialize_forks(data) != 0)
 		return (1);
+	return (0);
 }
 
 int	initialize_forks(t_data *data)
@@ -52,8 +53,8 @@ int	initialize_forks(t_data *data)
 
 	data->fork_mutex = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *)
 			* data->number_of_philos);
-	data->fork_state = (int *)malloc(sizeof(int) * data->number_of_philos);
-	if (!data->fork_state || !data->fork_mutex)
+	data->fork_status = (int *)malloc(sizeof(int) * data->number_of_philos);
+	if (!data->fork_status || !data->fork_mutex)
 		return (ft_error("Failure initializing the data structure.", data));
 	i = -1;
 	while (++i < data->number_of_philos)
@@ -63,7 +64,7 @@ int	initialize_forks(t_data *data)
 			return (ft_error("Failure in fork malloc.\n", data));
 		if (pthread_mutex_init(data->fork_mutex[i], NULL) != 0)
 			return (ft_error("Failure initializing mutex.\n", data));
-		data->fork_state[i] = 0;
+		data->fork_status[i] = 0;
 	}
 	return (0);
 }

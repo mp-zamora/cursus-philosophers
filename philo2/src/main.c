@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:29:34 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:38:51 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	free_philo_forks(t_data *data)
 
 void	free_philo_data(t_data *data)
 {
-	int	i;
-
 	if (!data)
 		return ;
 	if (data->philo_list)

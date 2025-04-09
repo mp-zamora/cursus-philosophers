@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 10:40:33 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:43:23 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	join_threads(t_data *data)
 	num = 0;
 	while (iter && ++num <= data->number_of_philos)
 	{
-		if (pthread_join(iter->thread, NULL) != 0)
+		if (pthread_join(*iter->thread, NULL) != 0)
 			return (ft_error("Failure joining a thread.", data));
 		iter = iter->next;
 	}
@@ -50,9 +50,9 @@ void	terminate_simulation(t_data *data)
 {
 	if (!data || !data->main_mutex)
 		return ;
-	pthread_mutex_lock(&(data->main_mutex));
+	pthread_mutex_lock(data->main_mutex);
 	data->terminate = 1;
-	pthread_mutex_unlock(&(data->main_mutex));
+	pthread_mutex_unlock(data->main_mutex);
 }
 
 int	did_philosophers_eat_enough(t_data *data)
