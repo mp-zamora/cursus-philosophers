@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 12:09:26 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:30:20 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	free_philo_data(t_data *data)
 }
 
 /* NEED TO ADD PROTECTION AGAINST NON NUMERICAL VALUES*/
-/* DEADLOCK FOUND -> valgrind --leak-check=full ./philo 5 410 200 100 */
+/* IT FAILS SOME BASIC TESTS */
 int	main(int argc, char *argv[])
 {
 	t_data	*data;
