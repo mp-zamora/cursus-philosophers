@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:08:29 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/02/06 14:18:29 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:30:14 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ int	ft_atoi(const char *nptr)
 	return (result * minus);
 }
 
-long	get_current_milis(t_data *data)
+int	ft_is_str_numeric(char *str)
 {
-	struct timeval	time;
+	int	i;
 
-	if (gettimeofday(&time, NULL) == -1)
-		ft_error("Failure fetching current time.", data);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	i = -1;
+	while (str[++i])
+		if (str[i] < '0' || str[i] > '9')
+			return (FALSE);
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 12:48:15 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:27:55 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,13 @@ int	did_philosophers_eat_enough(t_data *data)
 	if (philo_count == data->number_of_philos)
 		return (TRUE);
 	return (FALSE);
+}
+
+long	get_current_milis(t_data *data)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		ft_error("Failure fetching current time.", data);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

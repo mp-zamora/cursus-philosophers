@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 11:37:05 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:30:05 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isspace(int c);
 int		ft_specialcases(const char *nptr);
 int		ft_atoi(const char *nptr);
-long	get_current_milis(t_data *data);
+int		ft_is_str_numeric(char *str);
 
 /* AUXILIARY */
 int		launch_threads(t_data *data);
 int		join_threads(t_data *data);
 void	terminate_simulation(t_data *data);
 int		did_philosophers_eat_enough(t_data *data);
+long	get_current_milis(t_data *data);
 
 /* FORKS */
 int		catch_first_fork(t_philo *philo);

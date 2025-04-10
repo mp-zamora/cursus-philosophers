@@ -13,7 +13,7 @@
 NAME = philo
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-DFLAGS = -g
+DFLAGS = -g -O1
 LDFLAGS = -lpthread
 
 SRC_PATH = src/
@@ -40,7 +40,7 @@ RESET = \033[0m
 
 all: $(NAME)
 
-debug: CFLAGS += -g
+debug: CFLAGS += $(DFLAGS)
 debug: $(NAME)
 
 $(NAME): $(OBJS)
