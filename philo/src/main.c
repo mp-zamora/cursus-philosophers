@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 13:37:44 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:42:48 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void	free_philo_data(t_data *data)
 	free (data);
 }
 
-/* NEED TO ADD PROTECTION AGAINST NON NUMERICAL VALUES*/
-/* IT FAILS SOME BASIC TESTS */
 int	main(int argc, char *argv[])
 {
 	t_data	*data;
