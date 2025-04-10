@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 12:34:58 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:57:55 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	go_think(t_philo *philo)
 			catch_first_fork(philo);
 		if (!has_second_fork(philo))
 			catch_second_fork(philo);
-		if (check_termination(philo->data) ||
-			(has_first_fork(philo) && has_second_fork(philo)))
+		if (check_termination(philo->data) || (has_first_fork(philo)
+				&& has_second_fork(philo)))
 			break ;
 	}
 	return (0);
@@ -58,7 +58,7 @@ int	go_eat(t_philo *philo)
 
 int	go_sleep(t_philo *philo)
 {
-	long  current_milis;
+	long	current_milis;
 
 	pthread_mutex_lock(philo->philo_mutex);
 	philo->status = 0;

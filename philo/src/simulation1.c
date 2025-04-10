@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 12:11:20 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:59:59 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	run_simulation(t_data *data)
 	return (0);
 }
 
-long  get_last_eat_milis(t_philo *philo)
+long	get_last_eat_milis(t_philo *philo)
 {
-	long  last_eat_milis;
+	long	last_eat_milis;
 
 	pthread_mutex_lock(philo->philo_mutex);
 	last_eat_milis = philo->last_eat_milis;
@@ -33,7 +33,7 @@ long  get_last_eat_milis(t_philo *philo)
 int	monitor_philosophers(t_data *data)
 {
 	t_philo		*iter;
-	
+
 	while (1)
 	{
 		iter = data->philo_list;
@@ -70,11 +70,10 @@ int	check_termination(t_data *data)
 int	kill_philosopher(t_philo *philo)
 {
 	long	current_milis;
-	
+
 	terminate_simulation(philo->data);
 	current_milis = get_current_milis(philo->data);
 	printf("%ld %d died.\n", current_milis - philo->data->start_time,
 		philo->number);
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:54:42 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 12:24:56 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:57:24 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	leave_forks(t_philo *philo)
 int	has_first_fork(t_philo *philo)
 {
 	int	has_fork;
-	
+
 	has_fork = 0;
 	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->fork_ids[0] == -1)
@@ -100,7 +100,7 @@ int	has_first_fork(t_philo *philo)
 int	has_second_fork(t_philo *philo)
 {
 	int	has_fork;
-	
+
 	has_fork = 0;
 	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->fork_ids[1] == -1)

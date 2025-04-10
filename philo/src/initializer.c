@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:38:02 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 12:09:11 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:58:59 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	initialize_forks(t_data *data)
 	i = -1;
 	while (++i < data->number_of_philos)
 	{
-		data->fork_mutex[i] = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		data->fork_mutex[i] \
+			= (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 		if (!data->fork_mutex[i])
 			return (ft_error("Failure in fork malloc.\n", data));
 		if (pthread_mutex_init(data->fork_mutex[i], NULL) != 0)
