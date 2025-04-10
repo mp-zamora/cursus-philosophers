@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/09 12:10:20 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 12:48:15 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,21 @@ void	terminate_simulation(t_data *data)
 int	did_philosophers_eat_enough(t_data *data)
 {
 	t_philo	*iter;
+	int		philo_count;
 
 	if (data->eat_to_finish == -1)
 		return (FALSE);
+	philo_count = 0;
 	iter = data->philo_list;
 	while (iter)
 	{
 		pthread_mutex_lock(iter->philo_mutex);
 		if (iter->times_eaten >= data->eat_to_finish)
-		{
-			pthread_mutex_unlock(iter->philo_mutex);
-			return (TRUE);
-		}
+			philo_count++;
+		pthread_mutex_unlock(iter->philo_mutex);
+		iter = iter->next;
 	}
+	if (philo_count == data->number_of_philos)
+		return (TRUE);
 	return (FALSE);
 }
