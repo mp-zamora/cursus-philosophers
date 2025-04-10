@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 13:36:36 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:37:44 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char *argv[])
 	if (argc != 5 && argc != 6)
 		return (ft_error("Not enough args!", NULL));
 	if (!ft_is_str_numeric(argv[1]) || !ft_is_str_numeric(argv[2])
-			|| !ft_is_str_numeric(argv[3]) || !ft_is_str_numeric(argv[4]))
+		|| !ft_is_str_numeric(argv[3]) || !ft_is_str_numeric(argv[4]))
 		return (ft_error("Only natural numeric inputs are allowed!", NULL));
 	if (argc == 6 && !ft_is_str_numeric(argv[5]))
 		return (ft_error("Only natural numeric inputs are allowed!", NULL));
