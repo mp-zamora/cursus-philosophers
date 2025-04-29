@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 19:10:37 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:21:23 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	monitor_philosophers(t_data *data)
 	long	last_eat_milis;
 	long	current_milis;
 
+	while (has_sim_started(data) != 1)
+		custom_sleep(100, data);
 	while (1)
 	{
 		iter = data->philo_list;

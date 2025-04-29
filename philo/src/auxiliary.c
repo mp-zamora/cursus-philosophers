@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 19:15:06 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:32:43 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,14 @@
 int	launch_threads(t_data *data)
 {
 	t_philo	*iter;
-	int		num;
 
 	iter = data->philo_list;
-	num = 0;
-	while (iter && num < data->number_of_philos)
+	while (iter)
 	{
-		iter->last_eat_milis = get_current_milis(data);
-		iter->last_change_milis = get_current_milis(data);
 		if (pthread_create(iter->thread, NULL, philo_routine, iter) != 0)
 			return (ft_error("Failure creating a thread.", data));
 		iter = iter->next;
-    custom_sleep(1, data);
+		custom_sleep(100, data);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:38:02 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 19:11:18 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:30:14 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	initialize_philo_data(int argc, char *argv[], t_data **data)
 	if (!(*data))
 		return (ft_error("Failure initializing the data structure.", NULL));
 	(*data)->terminate = 0;
+	(*data)->threads_ready = 0;
 	(*data)->number_of_philos = ft_atoi(argv[1]);
 	(*data)->time_to_die = ft_atoi(argv[2]);
 	(*data)->time_to_eat = ft_atoi(argv[3]);

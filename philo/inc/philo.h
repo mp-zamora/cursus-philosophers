@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 19:11:11 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:29:55 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 {
 	int				terminate;
 	int				number_of_philos;
+	int				threads_ready;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
@@ -88,7 +89,8 @@ int		initialize_philosophers(t_data *data);
 int		initialize_philo_list(t_data *data);
 
 /* SIMULATION 2 */
-void  custom_sleep(long sleep_milis, t_data *data);
+int		has_sim_started(t_data *data);
+void	custom_sleep(long sleep_micros, t_data *data);
 int		go_think(t_philo *philo);
 int		go_eat(t_philo *philo);
 int		go_sleep(t_philo *philo);
