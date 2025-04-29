@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 12:59:59 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:10:37 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,24 @@ long	get_last_eat_milis(t_philo *philo)
 
 int	monitor_philosophers(t_data *data)
 {
-	t_philo		*iter;
+	t_philo	*iter;
+	long	last_eat_milis;
+	long	current_milis;
 
 	while (1)
 	{
 		iter = data->philo_list;
 		while (iter)
 		{
-			if (get_current_milis(data) - get_last_eat_milis(iter) \
-				> data->time_to_die)
+			last_eat_milis = get_last_eat_milis(iter);
+			current_milis = get_current_milis(data);
+			// printf("\033[32mCURRENT TIME: %ld\033[0m\n", current_milis - data->start_time);
+			// printf("\033[33mLAST EAT TIME: %ld (%d)\033[0m\n", last_eat_milis - data->start_time, iter->number);
+			// printf("\033[34mTIME ELAPSED: %ld\033[0m\n", current_milis - last_eat_milis);
+			// printf("\033[35mTIME_TO_DIE: %ld\033[0m\n", data->time_to_die);
+			if (current_milis - last_eat_milis > data->time_to_die)
 			{
+				// printf("\033[31mDEAD: %d\033[0m\n", iter->number);
 				kill_philosopher(iter);
 				break ;
 			}
@@ -52,7 +60,7 @@ int	monitor_philosophers(t_data *data)
 		if (check_termination(data))
 			break ;
 		else
-			usleep(5000);
+			custom_sleep(100, data);
 	}
 	return (0);
 }

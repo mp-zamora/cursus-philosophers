@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:54:42 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 12:57:24 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:11:08 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ int	catch_first_fork(t_philo *philo)
 {
 	int	target_fork;
 
-	if (philo->number == philo->data->number_of_philos)
-		target_fork = 0;
+	// if (philo->number == philo->data->number_of_philos)
+	// 	target_fork = 0;
+	// else
+	// 	target_fork = philo->number - 1;
+	if (philo->number % 2 == 0)
+		target_fork = philo->number % philo->data->number_of_philos;
 	else
 		target_fork = philo->number - 1;
 	pthread_mutex_lock(philo->data->fork_mutex[target_fork]);
@@ -44,10 +48,14 @@ int	catch_second_fork(t_philo *philo)
 {
 	int	target_fork;
 
-	if (philo->number == philo->data->number_of_philos)
+	if (philo->number % 2 == 0)
 		target_fork = philo->number - 1;
 	else
-		target_fork = philo->number;
+		target_fork = philo->number % philo->data->number_of_philos;
+	// if (philo->number == philo->data->number_of_philos)
+	// 	target_fork = philo->number - 1;
+	// else
+	// 	target_fork = philo->number;
 	pthread_mutex_lock(philo->data->fork_mutex[target_fork]);
 	if (philo->data->fork_status[target_fork] == 0)
 	{

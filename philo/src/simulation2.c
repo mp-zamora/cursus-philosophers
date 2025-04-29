@@ -6,11 +6,24 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 12:57:55 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:14:44 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void  custom_sleep(long sleep_milis, t_data *data)
+{
+	long  start;
+
+	start = get_current_milis(data);
+	while(get_current_milis(data) - start < sleep_milis)
+	{
+		if (check_termination(data))
+			break;
+		usleep(50);
+	}
+}
 
 int	go_think(t_philo *philo)
 {
@@ -27,11 +40,12 @@ int	go_think(t_philo *philo)
 	{
 		if (!has_first_fork(philo))
 			catch_first_fork(philo);
-		if (!has_second_fork(philo))
+		if (!has_second_fork(philo) && has_first_fork(philo))
 			catch_second_fork(philo);
 		if (check_termination(philo->data) || (has_first_fork(philo)
 				&& has_second_fork(philo)))
 			break ;
+		custom_sleep(1, philo->data);
 	}
 	return (0);
 }
@@ -48,7 +62,7 @@ int	go_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->philo_mutex);
 	printf("%ld %d is eating.\n", \
 		current_milis - philo->data->start_time, philo->number);
-	usleep(philo->data->time_to_eat * 1000);
+	custom_sleep(philo->data->time_to_eat, philo->data);
 	pthread_mutex_lock(philo->philo_mutex);
 	philo->times_eaten += 1;
 	pthread_mutex_unlock(philo->philo_mutex);
@@ -67,7 +81,7 @@ int	go_sleep(t_philo *philo)
 	pthread_mutex_unlock(philo->philo_mutex);
 	printf("%ld %d is sleeping.\n", \
 		current_milis - philo->data->start_time, philo->number);
-	usleep(philo->data->time_to_eat * 1000);
+	custom_sleep(philo->data->time_to_sleep, philo->data);
 	return (0);
 }
 
@@ -78,8 +92,6 @@ void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		if (check_termination(philo->data))
-			break ;
 		go_think(philo);
 		if (check_termination(philo->data))
 			break ;
@@ -87,6 +99,8 @@ void	*philo_routine(void *arg)
 		if (check_termination(philo->data))
 			break ;
 		go_sleep(philo);
+		if (check_termination(philo->data))
+			break ;
 	}
 	return (NULL);
 }
