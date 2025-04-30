@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:38:02 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 20:30:14 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:00:47 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	initialize_philo_data(int argc, char *argv[], t_data **data)
 	(*data)->time_to_die = ft_atoi(argv[2]);
 	(*data)->time_to_eat = ft_atoi(argv[3]);
 	(*data)->time_to_sleep = ft_atoi(argv[4]);
-	(*data)->start_time = get_current_milis(*data);
+	(*data)->start_time = get_current_ms(*data);
 	if (argc == 6 && argv[5])
 		(*data)->eat_to_finish = ft_atoi(argv[5]);
 	else

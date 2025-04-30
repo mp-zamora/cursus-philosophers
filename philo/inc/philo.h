@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 20:29:55 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:09:09 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,9 @@ int		ft_is_str_numeric(char *str);
 
 /* AUXILIARY */
 int		launch_threads(t_data *data);
-int		join_threads(t_data *data);
 void	terminate_simulation(t_data *data);
 int		did_philosophers_eat_enough(t_data *data);
-long	get_current_milis(t_data *data);
+long	get_current_ms(t_data *data);
 
 /* FORKS */
 int		catch_first_fork(t_philo *philo);
@@ -98,7 +97,7 @@ void	*philo_routine(void *arg);
 
 /* SIMULATION 1 */
 int		run_simulation(t_data *data);
-long	get_last_eat_milis(t_philo *philo);
+long	get_last_eat(t_philo *philo);
 int		monitor_philosophers(t_data *data);
 int		check_termination(t_data *data);
 int		kill_philosopher(t_philo *philo);

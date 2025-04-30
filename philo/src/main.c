@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/30 15:06:12 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:01:49 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,4 @@ int	main(int argc, char *argv[])
 	run_simulation(data);
 	free_philo_data(data);
 	return (EXIT_SUCCESS);
-} 
+}
