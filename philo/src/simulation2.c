@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/29 20:56:31 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:44:36 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int	go_think(t_philo *philo)
 		current_milis - philo->data->start_time, philo->number);
 	while (1)
 	{
-		if (!has_first_fork(philo))
+		if (!has_first_fork(philo) && !check_termination(philo->data))
 			catch_first_fork(philo);
-		if (!has_second_fork(philo) && has_first_fork(philo))
+		if (!has_second_fork(philo) && has_first_fork(philo)
+				&& !check_termination(philo->data))
 			catch_second_fork(philo);
 		if (check_termination(philo->data) || (has_first_fork(philo)
 				&& has_second_fork(philo)))
@@ -63,10 +64,10 @@ int	go_eat(t_philo *philo)
 	printf("%ld %d is eating.\n", \
 		current_milis - philo->data->start_time, philo->number);
 	custom_sleep(philo->data->time_to_eat * 1000, philo->data);
+	leave_forks(philo);
 	pthread_mutex_lock(philo->philo_mutex);
 	philo->times_eaten += 1;
 	pthread_mutex_unlock(philo->philo_mutex);
-	leave_forks(philo);
 	return (0);
 }
 

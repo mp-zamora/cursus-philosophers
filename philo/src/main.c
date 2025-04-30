@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:17:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/10 13:42:48 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:06:12 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,15 @@ int	main(int argc, char *argv[])
 		return (ft_error("Not enough args!", NULL));
 	if (!ft_is_str_numeric(argv[1]) || !ft_is_str_numeric(argv[2])
 		|| !ft_is_str_numeric(argv[3]) || !ft_is_str_numeric(argv[4]))
-		return (ft_error("Only natural numeric inputs are allowed!", NULL));
+		return (ft_error("Only positive numeric inputs are allowed!", NULL));
 	if (argc == 6 && !ft_is_str_numeric(argv[5]))
-		return (ft_error("Only natural numeric inputs are allowed!", NULL));
+		return (ft_error("Only positive numeric inputs are allowed!", NULL));
+	if (argv[1][0] == '0' || argv[2][0] == '0' || argv[3][0] == '0'
+		|| argv[4][0] == '0' || (argc == 6 && argv[5][0] == '0'))
+		return (ft_error("Arguments must not begin with zero!", NULL));
 	if (initialize_philo_data(argc, argv, &data) != 0)
 		return (ft_error("Initialization of philo data failed!", data));
 	run_simulation(data);
 	free_philo_data(data);
 	return (EXIT_SUCCESS);
-}
+} 
