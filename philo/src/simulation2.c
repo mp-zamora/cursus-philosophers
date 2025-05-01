@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/05/01 12:02:24 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:19:42 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	go_think(t_philo *philo)
 	pthread_mutex_unlock(philo->philo_mutex);
 	printf("%ld %d is thinking.\n", \
 		current_milis - philo->data->start_time, philo->number);
-	if (philo->number % 2 == 0)
-		custom_sleep(100, philo->data);
 	while (1)
 	{
 		if (!has_first_fork(philo))
@@ -97,10 +95,10 @@ void	*philo_routine(void *arg)
 	pthread_mutex_lock(philo->data->main_mutex);
 	philo->data->threads_ready++;
 	pthread_mutex_unlock(philo->data->main_mutex);
-	// while (!has_sim_started(philo->data))
-	// 	custom_sleep(100, philo->data);
-	// if (philo->number % 2 != 0)
-	// 	go_sleep(philo);
+	while (!has_sim_started(philo->data))
+		custom_sleep(100, philo->data);
+	if (philo->number % 2 != 0)
+		custom_sleep(philo->data->time_to_sleep * 100, philo->data);
 	while (1)
 	{
 		go_think(philo);
