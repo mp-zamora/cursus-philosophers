@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/30 16:08:49 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:54:38 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	monitor_philosophers(t_data *data)
 	t_philo	*iter;
 
 	while (has_sim_started(data) != 1)
-		custom_sleep(1000, data);
+		custom_sleep(100, data);
 	while (1)
 	{
 		iter = data->philo_list;
 		while (iter)
 		{
-			if (get_current_ms(data) - get_last_eat(iter) > data->time_to_die)
+			if (get_current_ms(data) - get_last_eat(iter) >= data->time_to_die)
 			{
 				kill_philosopher(iter);
 				break ;

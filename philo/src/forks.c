@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:54:42 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/30 15:59:16 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:23:19 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	catch_first_fork(t_philo *philo)
 	if (philo->data->fork_status[target_fork] == 0)
 	{
 		philo->data->fork_status[target_fork] = 1;
-		pthread_mutex_lock(philo->philo_mutex);
 		philo->fork_ids[0] = target_fork;
-		pthread_mutex_unlock(philo->philo_mutex);
 	}
 	else
 	{
@@ -51,9 +49,7 @@ int	catch_second_fork(t_philo *philo)
 	if (philo->data->fork_status[target_fork] == 0)
 	{
 		philo->data->fork_status[target_fork] = 1;
-		pthread_mutex_lock(philo->philo_mutex);
 		philo->fork_ids[1] = target_fork;
-		pthread_mutex_unlock(philo->philo_mutex);
 	}
 	else
 	{
@@ -68,7 +64,6 @@ int	catch_second_fork(t_philo *philo)
 
 int	leave_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->philo_mutex);
 	pthread_mutex_lock(philo->data->fork_mutex[philo->fork_ids[0]]);
 	philo->data->fork_status[philo->fork_ids[0]] = 0;
 	pthread_mutex_unlock(philo->data->fork_mutex[philo->fork_ids[0]]);
@@ -77,7 +72,6 @@ int	leave_forks(t_philo *philo)
 	philo->data->fork_status[philo->fork_ids[1]] = 0;
 	pthread_mutex_unlock(philo->data->fork_mutex[philo->fork_ids[1]]);
 	philo->fork_ids[1] = -1;
-	pthread_mutex_unlock(philo->philo_mutex);
 	return (0);
 }
 
@@ -86,12 +80,10 @@ int	has_first_fork(t_philo *philo)
 	int	has_fork;
 
 	has_fork = 0;
-	pthread_mutex_lock(philo->philo_mutex);
 	if (philo->fork_ids[0] == -1)
 		has_fork = 0;
 	else
 		has_fork = 1;
-	pthread_mutex_unlock(philo->philo_mutex);
 	return (has_fork);
 }
 
