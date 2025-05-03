@@ -6,7 +6,7 @@
 #    By: mpenas-z <mpenas-z@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 14:16:05 by mpenas-z          #+#    #+#              #
-#    Updated: 2025/05/02 10:54:57 by mpenas-z         ###   ########.fr        #
+#    Updated: 2025/05/03 14:25:44 by mpenas-z         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ OBJ_PATH = obj/
 SRC =	main.c \
 		simulation1.c \
 		simulation2.c \
+		simulation3.c \
 		auxiliary.c \
 		utilities.c \
 		initializer.c \

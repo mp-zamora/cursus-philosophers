@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/05/03 13:17:20 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:25:20 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		ft_atoi(const char *nptr);
 int		ft_is_str_numeric(char *str);
 
 /* AUXILIARY */
+int		has_sim_started(t_data *data);
 int		launch_threads(t_data *data);
 void	terminate_simulation(t_data *data);
 int		did_philosophers_eat_enough(t_data *data);
@@ -88,8 +89,10 @@ int		initialize_forks(t_data *data);
 int		initialize_philosophers(t_data *data);
 int		initialize_philo_list(t_data *data);
 
+/* SIMULATION 3 */
+void	init_philo(t_philo *philo);
+
 /* SIMULATION 2 */
-int		has_sim_started(t_data *data);
 void	custom_sleep(long sleep_micros, t_data *data);
 int		go_think(t_philo *philo);
 int		go_eat(t_philo *philo);

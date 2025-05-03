@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/05/03 13:46:15 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:26:12 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,7 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->last_eat_milis = get_current_ms(philo->data);
-	philo->last_change_milis = philo->last_eat_milis;
-	pthread_mutex_lock(philo->data->main_mutex);
-	philo->data->threads_ready++;
-	pthread_mutex_unlock(philo->data->main_mutex);
-	while (!has_sim_started(philo->data))
-		custom_sleep(100, philo->data);
-	philo->last_eat_milis = get_current_ms(philo->data);
-	philo->last_change_milis = philo->last_eat_milis;
+	init_philo(philo);
 	while (1)
 	{
 		go_think(philo);
