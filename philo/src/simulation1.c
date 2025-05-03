@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:05:12 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/05/01 11:54:38 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:46:31 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	run_simulation(t_data *data)
 		if (pthread_join(*iter->thread, NULL) != 0)
 			return (ft_error("Failure joining a thread.", data));
 		iter = iter->next;
+		custom_sleep(100, data);
 	}
 	return (0);
 }
@@ -44,6 +45,7 @@ int	monitor_philosophers(t_data *data)
 
 	while (has_sim_started(data) != 1)
 		custom_sleep(100, data);
+	custom_sleep(5000, data);
 	while (1)
 	{
 		iter = data->philo_list;
@@ -78,11 +80,10 @@ int	check_termination(t_data *data)
 
 int	kill_philosopher(t_philo *philo)
 {
-	long	current_milis;
-
 	terminate_simulation(philo->data);
-	current_milis = get_current_ms(philo->data);
-	printf("%ld %d died.\n", current_milis - philo->data->start_time,
-		philo->number);
+	pthread_mutex_lock(philo->data->write_mutex);
+	printf("%ld %d died.\n", get_current_ms(philo->data)
+		- philo->data->start_time, philo->number);
+	pthread_mutex_unlock(philo->data->write_mutex);
 	return (0);
 }

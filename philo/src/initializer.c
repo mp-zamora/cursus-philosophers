@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 10:38:02 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/30 16:00:47 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:17:53 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int	initialize_mutexes(t_data *data)
 	if (!data->main_mutex)
 		return (ft_error("Failure creating main mutex.", data));
 	if (pthread_mutex_init(data->main_mutex, NULL) != 0)
+		return (ft_error("Failure initializing mutex.\n", data));
+	data->write_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (!data->write_mutex)
+		return (ft_error("Failure creating write mutex.", data));
+	if (pthread_mutex_init(data->write_mutex, NULL) != 0)
 		return (ft_error("Failure initializing mutex.\n", data));
 	if (initialize_forks(data) != 0)
 		return (1);

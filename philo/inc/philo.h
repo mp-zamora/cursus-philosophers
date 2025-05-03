@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 21:07:32 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/30 16:09:09 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:17:20 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_data
 	int				eat_to_finish;
 	int				*fork_status;
 	pthread_mutex_t	*main_mutex;
+	pthread_mutex_t	*write_mutex;
 	pthread_mutex_t	**fork_mutex;
 	t_philo			*philo_list;
 }	t_data;

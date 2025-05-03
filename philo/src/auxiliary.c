@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:59 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/04/30 16:09:23 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:33:35 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	launch_threads(t_data *data)
 		if (pthread_create(iter->thread, NULL, philo_routine, iter) != 0)
 			return (ft_error("Failure creating a thread.", data));
 		iter = iter->next;
+		/*custom_sleep(100, data);*/
 	}
 	return (0);
 }
