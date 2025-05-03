@@ -6,7 +6,7 @@
 /*   By: mpenas-z <mpenas-z@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:06 by mpenas-z          #+#    #+#             */
-/*   Updated: 2025/05/03 14:26:12 by mpenas-z         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:38:13 by mpenas-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	go_think(t_philo *philo)
 {
 	long	current_milis;
 
-	pthread_mutex_lock(philo->philo_mutex);
 	pthread_mutex_lock(philo->data->write_mutex);
 	current_milis = get_current_ms(philo->data);
 	printf("%ld %d is thinking.\n", \
 		current_milis - philo->data->start_time, philo->number);
 	pthread_mutex_unlock(philo->data->write_mutex);
+	pthread_mutex_lock(philo->philo_mutex);
 	philo->status = 1;
 	philo->last_change_milis = current_milis;
 	pthread_mutex_unlock(philo->philo_mutex);
@@ -50,12 +50,12 @@ int	go_eat(t_philo *philo)
 {
 	long	current_milis;
 
-	pthread_mutex_lock(philo->philo_mutex);
 	pthread_mutex_lock(philo->data->write_mutex);
 	current_milis = get_current_ms(philo->data);
 	printf("%ld %d is eating.\n", \
 		current_milis - philo->data->start_time, philo->number);
 	pthread_mutex_unlock(philo->data->write_mutex);
+	pthread_mutex_lock(philo->philo_mutex);
 	philo->status = 2;
 	philo->last_change_milis = current_milis;
 	philo->last_eat_milis = current_milis;
@@ -70,12 +70,12 @@ int	go_sleep(t_philo *philo)
 {
 	long	current_milis;
 
-	pthread_mutex_lock(philo->philo_mutex);
 	pthread_mutex_lock(philo->data->write_mutex);
 	current_milis = get_current_ms(philo->data);
 	printf("%ld %d is sleeping.\n", \
 		current_milis - philo->data->start_time, philo->number);
 	pthread_mutex_unlock(philo->data->write_mutex);
+	pthread_mutex_lock(philo->philo_mutex);
 	philo->status = 0;
 	philo->last_change_milis = current_milis;
 	pthread_mutex_unlock(philo->philo_mutex);
