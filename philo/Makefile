@@ -6,13 +6,13 @@
 #    By: mpenas-z <mpenas-z@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 14:16:05 by mpenas-z          #+#    #+#              #
-#    Updated: 2025/05/03 16:41:52 by mpenas-z         ###   ########.fr        #
+#    Updated: 2025/05/05 10:31:10 by mpenas-z         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror # -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g -O1
 LDFLAGS = -lpthread
 
